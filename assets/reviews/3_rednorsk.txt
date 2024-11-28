@@ -1,0 +1,7 @@
+I couldn’t find anywhere inside the app to report a technical issue with the app (NOT a customer service complaint or order issue) so my issue report goes here instead.
+
+
+Since the last update (approx one week ago/late October 2024) when I swipe or click the “back” arrow to return to the previous page—usually the search results list—the app takes me back much further than the previous page. Since the last update, I’d estimate approx 80% of the time I swipe or click to return to JUST the previous page, the app takes me back several pages or back to the landing page. (Where you can quickly view & manage orders, lists, account, etc.) Additionally, the search box is not retaining my search terms anymore (or perhaps it’s just lagging wayyy behind ??) So I’m forced to retype/restart my search EVERY time the app takes me back too far. It’s time-consuming, it’s frustrating, and it’s a PITA.
+
+
+DEVS: If there is actually a way to provide app feedback/technical issues from INSIDE the app, I couldn’t find it. I am not new. While you’re doing updates, could you please place that option in an EASY-to-find, obvious place in the app? Thanks.
