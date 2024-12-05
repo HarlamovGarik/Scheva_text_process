@@ -1,9 +1,9 @@
-from PyQt5.QtWidgets import QDialog, QHBoxLayout, QApplication
+from PyQt5.QtWidgets import QHBoxLayout, QApplication
 from PyQt5.QtChart import QChart, QChartView, QBarSeries, QBarSet, QPieSeries, QBarCategoryAxis, QValueAxis
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QPainter
 
-from lab5.utils import BaseDialog
+from lab5.utils.LoadingDialog import BaseDialog
 
 
 class ChartDialog(BaseDialog):

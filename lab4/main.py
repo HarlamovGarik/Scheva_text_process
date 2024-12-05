@@ -25,27 +25,6 @@ def get_app_id(app_name_or_url):
             print("Застосунок не знайдено.")
             return None
 
-app_name_or_url = input("Введіть Google Play ID: ")
-app_id = get_app_id(app_name_or_url)
-user_reviews, _ = reviews(
-    app_id,
-    lang='en',
-    country='us',
-    sort=Sort.MOST_RELEVANT,
-    count=500
-)
-print(len(user_reviews))
-data = []
-
-for review in user_reviews:
-    data.append(
-        {
-            'filename': str(review['userName']).lower().replace(' ', '_').replace(' ', '_'),
-            'text': review['content'],
-            'score': review['score']
-        }
-    )
-
 
 # Завантаження даних
 def load_text_files(folder_path):
@@ -58,7 +37,7 @@ def load_text_files(folder_path):
 
 # Попередня обробка тексту
 def preprocess_text(data):
-    print(f"Process file - {data["filename"]}")
+    print(f"Process file - {data.filename}")
     text = data['text']
     stop_words = set(stopwords.words('english'))
 
@@ -71,68 +50,87 @@ def preprocess_text(data):
     data['text'] = tokens
     return data
 
+if __name__ == '__main__':
+    app_name_or_url = input("Введіть Google Play ID: ")
+    app_id = get_app_id(app_name_or_url)
+    user_reviews, _ = reviews(
+        app_id,
+        lang='en',
+        country='us',
+        sort=Sort.MOST_RELEVANT,
+        count=500
+    )
 
-# folder_path = "../assets/reviews"
-# data = load_text_files(folder_path)
+    print(len(user_reviews))
+    data = []
 
-preprocess_data = [preprocess_text(item) for item in data]
+    for review in user_reviews:
+        data.append(
+            {
+                'filename': str(review['userName']).lower().replace(' ', '_').replace(' ', '_'),
+                'text': review['content'],
+                'score': review['score']
+            }
+        )
 
-preprocess_text = [item["text"] for item in preprocess_data]
-
-vectorizer = CountVectorizer()
-X = vectorizer.fit_transform(preprocess_text)  # Матриця частот слів
-df_bow = pd.DataFrame(X.toarray(), columns=vectorizer.get_feature_names_out())
-
-labels = [0 if item['score'] <= 3 else 1 for item in data]
-y = labels
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.metrics import classification_report, accuracy_score
-
-nb_model = MultinomialNB()
-nb_model.fit(X_train, y_train)
-
-# Прогнозування
-y_pred_nb = nb_model.predict(X_test)
-
-# Оцінка
-print("Наївний Байєс:")
-print(classification_report(y_test, y_pred_nb))
-print("Точність:", accuracy_score(y_test, y_pred_nb))
-
-from sklearn.linear_model import LogisticRegression
-
-# Навчання моделі
-lr_model = LogisticRegression()
-lr_model.fit(X_train, y_train)
-
-# Прогнозування
-y_pred_lr = lr_model.predict(X_test)
-
-# Оцінка
-print("Логістична регресія:")
-print(classification_report(y_test, y_pred_lr))
-print("Точність:", accuracy_score(y_test, y_pred_lr))
-
-from sklearn.neighbors import KNeighborsClassifier
-
-# Навчання моделі (k=3)
-knn_model_3 = KNeighborsClassifier(n_neighbors=3, metric='euclidean')
-knn_model_3.fit(X_train, y_train)
-y_pred_knn_3 = knn_model_3.predict(X_test)
-
-# Навчання моделі (k=5)
-knn_model_5 = KNeighborsClassifier(n_neighbors=5, metric='manhattan')
-knn_model_5.fit(X_train, y_train)
-y_pred_knn_5 = knn_model_5.predict(X_test)
-
-# Оцінка
-print("KNN (k=3, Euclidean):")
-print(classification_report(y_test, y_pred_knn_3))
-print("Точність:", accuracy_score(y_test, y_pred_knn_3))
-
-print("KNN (k=5, Manhattan):")
-print(classification_report(y_test, y_pred_knn_5))
-print("Точність:", accuracy_score(y_test, y_pred_knn_5))
+    # preprocess_data = [preprocess_text(item) for item in data]
+    #
+    # preprocess_text = [item["text"] for item in preprocess_data]
+    #
+    # vectorizer = CountVectorizer()
+    # X = vectorizer.fit_transform(preprocess_text)  # Матриця частот слів
+    # df_bow = pd.DataFrame(X.toarray(), columns=vectorizer.get_feature_names_out())
+    #
+    # labels = [0 if item['score'] <= 3 else 1 for item in data]
+    # y = labels
+    #
+    # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    #
+    # from sklearn.naive_bayes import MultinomialNB
+    # from sklearn.metrics import classification_report, accuracy_score
+    #
+    # nb_model = MultinomialNB()
+    # nb_model.fit(X_train, y_train)
+    #
+    # # Прогнозування
+    # y_pred_nb = nb_model.predict(X_test)
+    #
+    # # Оцінка
+    # print("Наївний Байєс:")
+    # print(classification_report(y_test, y_pred_nb))
+    # print("Точність:", accuracy_score(y_test, y_pred_nb))
+    #
+    # from sklearn.linear_model import LogisticRegression
+    #
+    # # Навчання моделі
+    # lr_model = LogisticRegression()
+    # lr_model.fit(X_train, y_train)
+    #
+    # # Прогнозування
+    # y_pred_lr = lr_model.predict(X_test)
+    #
+    # # Оцінка
+    # print("Логістична регресія:")
+    # print(classification_report(y_test, y_pred_lr))
+    # print("Точність:", accuracy_score(y_test, y_pred_lr))
+    #
+    # from sklearn.neighbors import KNeighborsClassifier
+    #
+    # # Навчання моделі (k=3)
+    # knn_model_3 = KNeighborsClassifier(n_neighbors=3, metric='euclidean')
+    # knn_model_3.fit(X_train, y_train)
+    # y_pred_knn_3 = knn_model_3.predict(X_test)
+    #
+    # # Навчання моделі (k=5)
+    # knn_model_5 = KNeighborsClassifier(n_neighbors=5, metric='manhattan')
+    # knn_model_5.fit(X_train, y_train)
+    # y_pred_knn_5 = knn_model_5.predict(X_test)
+    #
+    # # Оцінка
+    # print("KNN (k=3, Euclidean):")
+    # print(classification_report(y_test, y_pred_knn_3))
+    # print("Точність:", accuracy_score(y_test, y_pred_knn_3))
+    #
+    # print("KNN (k=5, Manhattan):")
+    # print(classification_report(y_test, y_pred_knn_5))
+    # print("Точність:", accuracy_score(y_test, y_pred_knn_5))

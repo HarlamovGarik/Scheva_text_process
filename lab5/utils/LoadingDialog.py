@@ -2,26 +2,14 @@ import os
 
 import stanza
 from PyQt5.QtCore import Qt, QThread, pyqtSignal
-from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QProgressBar
-import spacy
+from PyQt5.QtWidgets import QVBoxLayout, QLabel, QProgressBar
 
+import spacy
+from lab5.utils.BaseDialog import BaseDialog
 
 def is_model_downloaded(lang):
     model_dir = os.path.join(stanza.resources.common.DEFAULT_MODEL_DIR, lang)
     return os.path.exists(model_dir)
-
-class BaseDialog(QDialog):
-    def __init__(self, width, height, title, parent=None, modal=False, controls=True):
-        super().__init__(parent)
-        self.setWindowTitle(title)
-        self.resize(width, height)
-        self.setModal(modal)
-        if controls:
-            self.setWindowFlags(
-                Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint
-            )
-        else:
-            self.setWindowFlags(Qt.Window | Qt.CustomizeWindowHint)
 
 class LoadingDialog(BaseDialog):
     def __init__(self, parent=None, message="Завантаження моделі, будь ласка, зачекайте..."):
