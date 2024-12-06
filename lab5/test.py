@@ -15,6 +15,7 @@ url = "https://www.unian.ua/war/masovana-ataka-rf-rosiyani-vdarili-kalibrami-z-k
 text = content_parser.extract_content(url)
 text = re.sub(r'[^\w\s],.', '', text)
 text = re.sub(rf'[{re.escape(string.punctuation)}]', '', text)
+text = text.replace('\n', '')
 
 print(text)
 stop_words = set(stopwords.words("ukrainian"))

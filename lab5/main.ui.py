@@ -286,8 +286,6 @@ class MainWindow(BaseWindow):
         if len(text) >= 2000:
             pass
 
-
-
     def process_text(self):
         url = self.url_input.text()
         print(url)
@@ -318,21 +316,22 @@ class MainWindow(BaseWindow):
             text = re.sub(r'[^\w\s,.]', '', text)
 
         tokens = word_tokenize(text.strip())
+
         if self.preprocessing_options["remove_stopwords"]["checked"]:
             lng = "ukrainian" if self.language == "uk" else "english"
             stop_words = set(stopwords.words(lng))
             tokens = [word for word in tokens if word not in stop_words]
-        else:
-            tokens = [word for word in tokens]
-
-
 
         if self.preprocessing_options["use_morph_analysis"]["checked"]:
-            morph = pymorphy2.MorphAnalyzer(lang=self.language)
-            tokens = [morph.parse(word)[0].normal_form for word in tokens]
+            if self.language == "en":
+                nlp = spacy.load("en_core_web_sm")
+                doc = nlp(' '.join(tokens))
+                tokens = [token.lemma_ for token in doc]
+            elif self.language == "uk":
+                morph = pymorphy2.MorphAnalyzer(lang=self.language)
+                tokens = [self.morph.parse(word)[0].normal_form for word in tokens]
 
         text = ' '.join(tokens)
-        print(tokens)
 
         print(f"Обробка тексту зайняла: {timer.measure(False)}.6f секунд")
 
