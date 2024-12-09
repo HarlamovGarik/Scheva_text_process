@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:ex="http://example.org/ontology#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://example.org/ontology#HumanRightsViolation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Outcome"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Syrian_Government">
+    <rdf:type rdf:resource="http://example.org/ontology#Government"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Actor"/>
+    <ex:claims_control rdf:resource="http://example.org/ontology#Idlib"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#ForeignPower">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Actor"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Russia">
+    <rdf:type rdf:resource="http://example.org/ontology#ForeignPower"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Actor"/>
+    <ex:brokered rdf:resource="http://example.org/ontology#Ceasefire_2020"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Province">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Location"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Victory">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Outcome"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Ceasefire_2020">
+    <rdf:type rdf:resource="http://example.org/ontology#Ceasefire"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Event"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Offensive">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Event"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#RebelGroup">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Actor"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Aleppo">
+    <rdf:type rdf:resource="http://example.org/ontology#City"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Location"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Ceasefire">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Event"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Conflict">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment>Основний клас, що описує конфлікт</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#City">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Location"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Government">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Actor"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Hayat_Tahrir_al_Sham">
+    <rdf:type rdf:resource="http://example.org/ontology#RebelGroup"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Actor"/>
+    <ex:controls rdf:resource="http://example.org/ontology#Aleppo"/>
+    <ex:opposes rdf:resource="http://example.org/ontology#Syrian_Government"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#HumanitarianCrisis">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Event"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Displacement">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Outcome"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Event">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment>Події, пов'язані з конфліктом</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Idlib">
+    <rdf:type rdf:resource="http://example.org/ontology#Province"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Location"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Actor">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment>Клас для учасників конфлікту (держави, організації, угрупування)</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Location">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment>Місця, де відбуваються події</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Outcome">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment>Результати конфлікту</rdfs:comment>
+  </rdf:Description>
+</rdf:RDF>

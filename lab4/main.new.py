@@ -98,7 +98,14 @@ class AppReviewProcessor:
         # Створення матриці ознак
         self.vectorizer = CountVectorizer()
         X = self.vectorizer.fit_transform([d['text'] for d in self.data])
-        y = [0 if d['score'] <= 3 else 1 for d in self.data]
+        y = []
+        for d in self.data:
+            if d['score'] <=2:
+                y.append("negative")
+            elif d['score'] == 3:
+                y.append("neutral")
+            else:
+                y.append("positive")
         return X, y
 
     def split_data(self, X, y, test_size=0.2, random_state=42):
